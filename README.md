@@ -1,5 +1,8 @@
 # Signature.js - overload methods in JavaScript
 ## Usage
+
+You can include the `signature.js` as a `<script>` tag or a node.js `require()` call.
+
 Create a function with `signature()` call, then you can `overload` it by passing the parameter types and the handler function.
 ```javascript
 var add = signature();
@@ -16,7 +19,7 @@ console.log(add(1, 2)); //3
 console.log(add([1, 2], [3, 4])); //[1, 2, 3, 4]
 ```
 
-You can create constructors as well
+You can create constructors as well.
 
 ```javascript
 var Point = signature();
