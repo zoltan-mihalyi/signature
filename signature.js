@@ -29,10 +29,10 @@
         for (var i = 0; i < this.types.length; i++) {
             var type = this.types[i];
             if (type === null || type === undefined) {
-                if(args[i] !== type) {
+                if (args[i] !== type) {
                     return false;
                 }
-            }else if (!(new Object(args[i]) instanceof type)) { //wrap
+            } else if (!(new Object(args[i]) instanceof type)) { //wrap
                 return false;
             }
         }

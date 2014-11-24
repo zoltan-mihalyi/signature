@@ -1,9 +1,20 @@
 var signature = require('./signature');
 
-var Point = function (x, y) {
+//var Point = function (x, y) {
+//    this.x = x;
+//    this.y = y;
+//};
+
+var Point = signature();
+
+Point.overload(Number, Number, function (x, y) {
     this.x = x;
     this.y = y;
-};
+});
+
+Point.overload(Point, function (p) {
+    Point.call(this, p.x, p.y);
+});
 
 Point.prototype.move = signature();
 
@@ -17,12 +28,12 @@ Point.prototype.move.overload(Number, Number, function (x, y) {
 });
 
 Point.prototype.move.overload(String, Number, function (s, n) {
-    var p=new Point(0,0);
-    p[s]=n;
+    var p = new Point(0, 0);
+    p[s] = n;
     this.move(p);
 });
 
-Point.prototype.move.overload( null, function (nu) {
+Point.prototype.move.overload(null, function (nu) {
     return nu;
 });
 
@@ -38,12 +49,12 @@ Point.prototype.move.overload(Array, function (x) {
     return sum;
 });
 
-Point.prototype.move.overload(Object, Object, Object, Object, Object, function(o1,o2,o3,o4,o5){
+Point.prototype.move.overload(Object, Object, Object, Object, Object, function (o1, o2, o3, o4, o5) {
     return 5;
 });
 
-
-var a = new Point(10, 10);
+var x = new Point(10, 10);
+var a = new Point(x);
 
 a.move(new Point(4, 5));
 console.log(a.x === 14);
@@ -57,11 +68,11 @@ try {
 } catch (e) {
     console.log(true);
 }
-a.move("x",2);
-console.log(a.x===22);
+a.move("x", 2);
+console.log(a.x === 22);
 
 console.log(a.move(null) === null);
 console.log(a.move(undefined) === undefined);
 console.log(a.move([1, 2, 3]) === 6);
 
-console.log(a.move(1,true,"x",null, undefined)===5);
+console.log(a.move(1, true, "x", null, undefined) === 5);
